@@ -16,20 +16,8 @@ class Ring():
         nx.draw(G)
         plt.show()
 
-    def contarLineas(self, url):
-        archivo = open(url, "r")
-        num_lineas = 0
-        for linea in archivo.readlines():
-            if linea != "\n":
-                num_lineas += 1
-                print(linea)
-        return num_lineas
-
-    def run(self, url):
-        num_lineas = self.contarLineas(url)
-        print("Existen " + str(num_lineas) + " lineas")
-
-        G = self.generateRingGraph(num_lineas)
+    def run(self, nodes):
+        G = self.generateRingGraph(nodes)
         str1 = "graphRing.gml"
         self.saveGraph(G, str1)
         self.drawGraph(G)
