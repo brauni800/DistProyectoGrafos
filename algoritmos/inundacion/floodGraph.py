@@ -4,7 +4,7 @@ import networkx as nx
 class Flood():
     #Se genera el Grafo de inundacion
     def generateFloodGraph(self, nodes):
-        G = nx.circulant_graph(nodes, [1]) #pendiente por modificar
+        G = nx.random_tree(nodes, 1) #pendiente por modificar
         return G
 
     #Save graph G as S, where S is a string

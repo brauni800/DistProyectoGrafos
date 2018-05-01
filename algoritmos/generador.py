@@ -8,14 +8,23 @@ class Generador():
     def generarGrafo(self, nodes, grafo):
         if grafo == "RING":
             Ring().run(int(nodes))
+            return "graphRing.gml"
         elif grafo == "FLOOD":
             Flood().run(int(nodes))
+            return "graphFlood.gml"
         elif grafo == "DEPTH":
             Depth().run(int(nodes))
+            return "graphDepth.gml"
 
 if len(sys.argv) != 3:
     print("Please supply a file name")
     raise SystemExit(1)
 
 gen = Generador()
-gen.generarGrafo(sys.argv[1], sys.argv[2])
+nodes = sys.argv[1]
+grafo = sys.argv[2]
+gmlUrl = gen.generarGrafo(nodes,grafo)
+gmlFile = open(gmlUrl)
+for x in range(len(gmlFile.readlines())):
+    print(gmlFile.readline())
+gmlFile.close()
