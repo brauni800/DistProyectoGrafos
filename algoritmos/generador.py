@@ -4,6 +4,10 @@ from inundacion.floodGraph import Flood
 from profundidad.depthGraph import Depth
 from node import Node
 from edge import Edge
+from algorithm import Algorithm
+from event import Event
+from model import Model
+from simulation import Simulation
 
 class Generador():
     def generarGrafo(self, nodes, grafo):
@@ -76,7 +80,7 @@ def generarTxt():
     file.close()
 
 if len(sys.argv) != 3:
-    print("Please supply a file name")
+    print(len(sys.argv))
     raise SystemExit(1)
 
 
@@ -85,3 +89,15 @@ edgeArray = []
 
 generarGrafo()
 generarTxt()
+
+experiment = Simulation("grafica.txt", 100)
+
+# asocia un pareja proceso/modelo con cada nodo de la grafica
+for i in range(1,len(experiment.graph)+1):
+    m = Algorithm()
+    experiment.setModel(m, i)
+
+# inserta un evento semilla en la agenda y arranca
+seed = Event("C", 0.0, 1, 1)
+experiment.init(seed)
+experiment.run()
